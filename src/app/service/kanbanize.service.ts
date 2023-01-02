@@ -12,8 +12,9 @@ export class KanbanizeService {
   constructor(private http: HttpClient) {
   }
 
-  verifyBoard(url: string): Observable<Object> {
-    return this.http.post(this.mountUrl(url, 'login'), {}, this.generateOptions(''));
+  login(url: string, request: UserAuthRequest): Observable<UserAuthResponse> {
+    return this.http.post<UserAuthResponse>(
+      this.mountUrl(url, 'login'), request, this.generateOptions(''));
   }
 
   getLogTime(request: GetLogTimeRequest): Observable<GetLogTimeResponse[]> {
@@ -35,6 +36,36 @@ export class KanbanizeService {
   }
 }
 
+export class UserAuthRequest {
+  email: string;
+  pass: string;
+
+  constructor(email: string, pass: string) {
+    this.email = email;
+    this.pass = pass;
+  }
+}
+
+export class UserAuthResponse {
+  id: number;
+  email: string;
+  apikey: string;
+  username: string;
+  realname: string;
+  timezone: string;
+  companyname: string;
+
+  constructor(id: number, email: string, apikey: string, username: string, realname: string, timezone: string, companyname: string) {
+    this.id = id;
+    this.email = email;
+    this.apikey = apikey;
+    this.username = username;
+    this.realname = realname;
+    this.timezone = timezone;
+    this.companyname = companyname;
+  }
+}
+
 export class GetLogTimeRequest {
   fromdate: Date;
   todate: Date;
@@ -46,6 +77,7 @@ export class GetLogTimeRequest {
     this.author = author;
   }
 }
+
 export class GetLogTimeResponse {
   id: string;
   date: Date;
