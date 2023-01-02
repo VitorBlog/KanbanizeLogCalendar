@@ -1,0 +1,28 @@
+<section class="hero is-fullheight background">
+  <div class="hero-body has-text-centered">
+    <div class="login has-background-white">
+      <div class="mt-5">
+        <form>
+          <p class="is-size-3 mb-4 has-text-weight-semibold">Fazer login</p>
+          <div class="field">
+            <div class="control">
+              <input class="input is-medium is-rounded" type="email" name="email" placeholder="voce@exemplo.com" required [(ngModel)]="formData.email"/>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <input class="input is-medium is-rounded" type="password" name="password" placeholder="**********" required [(ngModel)]="formData.password"/>
+            </div>
+          </div>
+          <br />
+          <button
+            class="button is-block is-fullwidth is-primary is-medium is-rounded"
+            type="submit"
+            [ngClass]="false? 'is-loading' : ''">
+            Entrar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
