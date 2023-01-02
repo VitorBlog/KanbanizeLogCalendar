@@ -13,10 +13,19 @@ export class KanbanizeService {
   }
 
   verifyBoard(url: string): Observable<Object> {
-    return this.http.post(this.mountUrl(url, 'login'), {});
+    return this.http.post(this.mountUrl(url, 'login'), {}, this.generateOptions(''));
   }
 
   mountUrl(url: string, functionName: string): string {
     return 'https://' + url + this.basePath + functionName;
+  }
+
+  generateOptions(key: string) {
+    return {
+      headers: {
+        'accept': 'application/json',
+        'apikey': key
+      }
+    };
   }
 }
