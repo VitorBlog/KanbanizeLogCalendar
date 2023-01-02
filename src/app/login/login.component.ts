@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-login',
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  faInfoCircle = faInfoCircle;
+
   formData = {
-    email: '',
-    password: ''
-  };                                                                                                                    
+    key: '',
+    board: ''
+  };
   loading = false;
 
   constructor() { }
