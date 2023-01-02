@@ -17,7 +17,8 @@
         <button
           class="button is-block is-fullwidth is-primary is-medium is-rounded"
           type="submit"
-          [ngClass]="loading? 'is-loading' : ''">
+          [ngClass]="loading? 'is-loading' : ''"
+          (click)="login()">
           Login
         </button>
       </form>
