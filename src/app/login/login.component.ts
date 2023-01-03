@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 import * as bulmaToast from 'bulma-toast'
 import {toast} from "bulma-toast";
+import {AuthService} from "../service/auth.service";
+import {KanbanizeService} from "../service/kanbanize.service";
 
 @Component({
   selector: 'app-login',
@@ -18,13 +20,15 @@ export class LoginComponent implements OnInit {
   };
   loading = false;
 
-  constructor() { }
+  constructor(private authService: AuthService, private kanbanizeService: KanbanizeService) { }
 
   ngOnInit(): void {
   }
 
   login() {
     this.loading = this.validate();
+
+    this.kanbanizeService.
   }
 
   validate(): boolean {

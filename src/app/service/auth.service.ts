@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
-import {UserAuthResponse} from "./kanbanize.service";
+import {UserResponse} from "./kanbanize.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  getUserData(): UserAuthResponse | undefined {
+  getUserData(): UserResponse | undefined {
     const data = localStorage.getItem("userData");
     if (!data) {
       return;
@@ -20,7 +20,7 @@ export class AuthService {
     return userData;
   }
 
-  saveUserData(response: UserAuthResponse) {
+  saveUserData(response: UserResponse) {
     localStorage.setItem("userData", JSON.stringify(response));
   }
 
