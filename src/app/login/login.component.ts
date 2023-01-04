@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
-import * as bulmaToast from 'bulma-toast'
 import {toast} from "bulma-toast";
+import {AuthService} from "../service/auth.service";
+import {KanbanizeService} from "../service/kanbanize.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   faInfoCircle = faInfoCircle;
 
@@ -18,13 +19,34 @@ export class LoginComponent implements OnInit {
   };
   loading = false;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor(private authService: AuthService, private kanbanizeService: KanbanizeService) { }
 
   login() {
     this.loading = this.validate();
+
+    this.kanbanizeService.getUser(
+      this.formData.board,
+      this.formData.key
+    ).subscribe(
+      (response) => {
+        toast(
+          {
+            message: 'Welcome, ' + response.data.realname + '!',
+            type: 'is-success'
+          }
+        );
+        this.authService.saveUserData(this.formData.key, this.formData.board, response.data);
+        window.location.reload();
+      },
+      () => {
+        toast(
+          {
+            message: 'Your key or board is invalid to Kanbanize.',
+            type: 'is-danger'
+          }
+        );
+      }
+    )
   }
 
   validate(): boolean {
