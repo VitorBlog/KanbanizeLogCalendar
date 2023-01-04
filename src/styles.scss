@@ -5,4 +5,39 @@ $secondary: #10ac84;
 
 body {
   background-color: $primary;
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-button {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background: #1dd1a1;
+  border: 0px none #1dd1a1;
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #19b98e;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #1dd1a1;
+}
+::-webkit-scrollbar-track {
+  background: #1dd1a1;
+  border: 0px none #1dd1a1;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #1dd1a1;
+}
+::-webkit-scrollbar-track:active {
+  background: #1dd1a1;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
