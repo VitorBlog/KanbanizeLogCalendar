@@ -19,7 +19,7 @@ export class KanbanizeService {
   }
 
   mountUrl(url: string, functionName: string): string {
-    return 'https://' + url + this.basePath + functionName;
+    return 'https://cors-anywhere.herokuapp.com/https://' + url + this.basePath + functionName;
   }
 
   generateOptions(key: string) {
