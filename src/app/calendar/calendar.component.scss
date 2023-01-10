@@ -1,0 +1,36 @@
+.columns.page {
+  height: 101vh;
+}
+
+.column {
+  background-color: white;
+}
+
+.log-list {
+  background-color: #1dd1a1;
+  height: 100%;
+}
+
+section {
+  height: 100%;
+}
+
+.date {
+  padding: 2.5vw;
+  border-style: dashed;
+  border-color: #efefef;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #dbfaf1;
+  }
+}
+
+.selected, .selected:hover {
+  background-color: #1dd1a1;
+}
+
+.logs {
+  height: 50vh;
+  overflow-y: visible;
+}
