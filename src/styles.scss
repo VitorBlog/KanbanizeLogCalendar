@@ -5,4 +5,39 @@ $secondary: #10ac84;
 
 body {
   background-color: $primary;
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+}
+::-webkit-scrollbar-button {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-thumb {
+  background: #00ffba;
+  border: 0px none #00ffba;
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00ffba;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #00ffba;
+}
+::-webkit-scrollbar-track {
+  background: #1dd1a1;
+  border: 0px none #1dd1a1;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #1aa27e;
+}
+::-webkit-scrollbar-track:active {
+  background: #1aa27e;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }

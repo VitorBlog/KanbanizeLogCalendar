@@ -45,8 +45,9 @@ export class LoginComponent {
             type: 'is-danger'
           }
         );
+        this.loading = false;
       }
-    )
+    );
   }
 
   validate(): boolean {

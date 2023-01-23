@@ -5,12 +5,12 @@
         <p class="is-size-4 mb-5 has-text-weight-semibold">Login in with<br>Kanbanize api token</p>
         <div class="field">
           <div class="control">
-            <input class="input is-medium is-rounded" type="text" name="key" placeholder="Your api key" required [(ngModel)]="formData.key"/>
+            <input class="input is-medium is-rounded" type="text" name="kanbanize" placeholder="board.kanbanize.com" required [(ngModel)]="formData.board"/>
           </div>
         </div>
         <div class="field">
           <div class="control">
-            <input class="input is-medium is-rounded" type="text" name="kanbanize" placeholder="board.kanbanize.com" required [(ngModel)]="formData.board"/>
+            <input class="input is-medium is-rounded" type="password" name="key" placeholder="Your api key" required [(ngModel)]="formData.key"/>
           </div>
         </div>
 
