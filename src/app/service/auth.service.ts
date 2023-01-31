@@ -22,7 +22,7 @@ export class AuthService {
     return userData;
   }
 
-  saveUserData(key: string, board: string, response: UserModel) {
+  saveUserData(key: string, board: string, response: UserModel | undefined) {
     localStorage.setItem("userData", JSON.stringify(new UserDataModel(key, board, response)));
   }
 
