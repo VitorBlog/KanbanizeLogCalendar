@@ -24,12 +24,19 @@ export class CalendarComponent implements OnInit {
   constructor(private authService: AuthService, private kanbanizeService: KanbanizeService) { }
 
   ngOnInit(): void {
-    this.dates = this.getAllDaysInMonth();
+    this.getAllDaysInMonth();
+    this.load();
+  }
 
+  load() {
     const userData = this.authService.getUserData();
     if (!userData) {
       return;
     }
+
+    this.totalHours = 0;
+    this.hours.clear();
+    this.loggedCards.clear();
 
     this.kanbanizeService.getLoggedTime(
       userData,
@@ -42,18 +49,19 @@ export class CalendarComponent implements OnInit {
       (response) => {
         response.forEach(
           (log) => {
-            this.totalHours += log.loggedtime;
+            const date = new Date(log.date);
+            const day = new Date(log.date).getDate();
 
-            const date = new Date(log.date).getDate();
-            const hours = this.hours.has(date)? this.hours.get(date)!! : 0;
+            this.totalHours += (date.getMonth() == this.showDate.getMonth()? log.loggedtime : 0);
+
+            const hours = this.hours.has(day)? this.hours.get(day)!! : 0;
             if (this.loggedCards.has(log.cardid)) {
               this.loggedCards.get(log.cardid)?.log.push(log);
             } else {
               this.loggedCards.set(log.cardid, new LoggedCardModel(log.cardid, log.cardtitle, [log]));
             }
 
-            this.hours.set(date, hours + log.loggedtime);
-            console.log(date, log.loggedtime + ' + ' + hours)
+            this.hours.set(day, hours + log.loggedtime);
           }
         );
 
@@ -69,19 +77,32 @@ export class CalendarComponent implements OnInit {
         );
         this.authService.deleteUserData()
       }
-    )
+    );
   }
 
   getAllDaysInMonth() {
+    const dates: Date[] = [];
     const date = new Date(this.showDate.getFullYear(), this.showDate.getMonth(), 1);
-    const dates = [];
+
+    const previousDate = new Date(this.showDate.getFullYear(), this.showDate.getMonth(), 1);
+    for (let day = date.getDay(); day > 0; day--) {
+      previousDate.setDate(previousDate.getDate() - 1);
+      dates.push(new Date(previousDate));
+    }
+    dates.reverse();
 
     while (date.getMonth() == this.showDate.getMonth()) {
       dates.push(new Date(date));
       date.setDate(date.getDate() + 1);
     }
 
-    return dates;
+    date.setDate(date.getDate() - 1);
+    for (let day = date.getDay(); day < 6; day++) {
+      date.setDate(date.getDate() + 1);
+      dates.push(new Date(date));
+    }
+
+    this.dates = dates;
   }
 
   getMonth(): string {
@@ -110,15 +131,29 @@ export class CalendarComponent implements OnInit {
     return loggedCards;
   }
 
-  formatTime(hours: number): string {
+  formatTime(hours: number, showMinutes: boolean = true): string {
     const hoursLeft = Math.floor(hours);
     const min = Math.floor((hours - hoursLeft) * 60);
 
-    return hoursLeft + 'h ' + min + 'm'
+    return hoursLeft + 'h' + (showMinutes? ' ' + min + 'm': '');
   }
 
-  getTodayHours(): string {
-    console.log(this.hours)
-    return this.formatTime(this.hours.has(this.showDate.getDate())? this.hours.get(this.showDate.getDate())!! : 0);
+  getHours(date: number = this.showDate.getDate(), showMinutes: boolean = true): string {
+    return this.formatTime(this.hours.has(date)? this.hours.get(date)!! : 0, showMinutes);
+  }
+
+  changeDate(date: Date) {
+    if (date.getMonth() == this.showDate.getMonth()) {
+      this.showDate = date;
+    } else {
+      this.changeMonth(this.showDate.getMonth() > date.getMonth()? -1 : 1);
+    }
+  }
+
+  changeMonth(total: number) {
+    this.loading = true;
+    this.showDate = new Date(this.showDate.getFullYear(), this.showDate.getMonth() + total, 1);
+    this.getAllDaysInMonth();
+    this.load();
   }
 }
