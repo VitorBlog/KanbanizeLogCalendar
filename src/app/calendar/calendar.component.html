@@ -4,7 +4,9 @@
       <section class="hero">
         <div class="hero-body has-text-centered pt-5">
           <p class="title">
+            <span class="is-primary is-clickable arrow" (click)="changeMonth(-1)"><</span>
             {{ getMonth() }} - {{ showDate.getFullYear() }}
+            <span class="is-primary is-clickable arrow" (click)="changeMonth(1)">></span>
           </p>
           <p class="subtitle">
             Total of {{ formatTime(totalHours) }}.
@@ -12,11 +14,14 @@
           <hr>
           <div class="columns is-flex-wrap-wrap is-flex-direction-row is-justify-content-center is-align-content-flex-start">
               <div
-                class="column date is-1by2 is-clickable"
+                class="column date is-clickable"
                 *ngFor="let date of dates"
-                (click)="showDate = date"
-                [class.selected]="showDate.getDate() == date.getDate()">
+                (click)="changeDate(date)"
+                [class.selected]="showDate.getDate() == date.getDate()"
+                [class.special]="date.getDay() == 0 || date.getDay() == 6"
+                [class.otherMonth]="showDate.getMonth() != date.getMonth()">
                 <p>{{ formatDate(date.getDate()) }}</p>
+                <span class="hour has-text-grey">{{ loading? '??' : getHours(date.getDate(), false) }}</span>
               </div>
           </div>
         </div>
@@ -29,7 +34,7 @@
             Day {{ formatDate(showDate.getDate()) }}
           </p>
           <p class="subtitle has-text-white">
-            Total of {{ getTodayHours() }}.
+            Total of {{ getHours() }}.
           </p>
           <hr>
           <div *ngIf="loading" class="columns">
