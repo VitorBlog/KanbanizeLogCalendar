@@ -7,8 +7,8 @@
 }
 
 .log-list {
-  background-color: #1dd1a1;
   height: 100%;
+  background-color: #1dd1a1;
 }
 
 section {
@@ -16,18 +16,30 @@ section {
 }
 
 .date {
-  padding: 2.5vw;
+  transition: 0.2s;
+  padding: 1.5vw 2.5vw;
   border-style: dashed;
   border-color: #efefef;
-  transition: 0.2s;
 
   &:hover {
     background-color: #dbfaf1;
   }
+
+  span {
+    font-size: 0.7vw;
+  }
 }
 
 .selected, .selected:hover {
-  background-color: #1dd1a1;
+  background-color: #1dd1a1 !important;
+}
+
+.otherMonth {
+  background-color: #8395a7 !important;
+}
+
+.special {
+  background-color: #c8d6e5;
 }
 
 .logs {
