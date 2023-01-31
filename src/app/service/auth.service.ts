@@ -18,6 +18,7 @@ export class AuthService {
       return;
     }
 
+    userData.board = userData.board.replace('.kanbanize.com', '');
     return userData;
   }
 
