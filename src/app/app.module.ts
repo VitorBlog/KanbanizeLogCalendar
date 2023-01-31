@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarComponent } from './calendar/calendar.component';
+import {InterceptorModule} from "./module/interceptor.module";
 
 @NgModule({
   declarations: [
@@ -15,10 +16,11 @@ import { CalendarComponent } from './calendar/calendar.component';
     CalendarComponent
   ],
   imports: [
-    HttpClientModule,
-    BrowserModule,
     FormsModule,
-    FontAwesomeModule
+    BrowserModule,
+    HttpClientModule,
+    FontAwesomeModule,
+    InterceptorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

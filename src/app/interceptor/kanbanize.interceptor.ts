@@ -11,9 +11,9 @@ export class KanbanizeInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const userData = this.authService.getUserData();
-    if (userData && userData.key) {
+    if (userData && userData.key && userData.board) {
       request = request.clone({
-        url: request.url.replace('@', environment.base_url),
+        url: request.url.replace('@', userData.board + environment.base_url),
         setHeaders: {
           apikey: userData.key,
           accept: 'application/json'
