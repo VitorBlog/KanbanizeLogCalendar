@@ -21,6 +21,12 @@ export class KanbanizeInterceptor implements HttpInterceptor {
       });
     }
 
+    if (environment.use_proxy) {
+      request = request.clone({
+        url: environment.proxy_address + request.url
+      });
+    }
+
     return next.handle(request);
   }
 }
