@@ -1,4 +1,4 @@
-import {LoggedTimeResponse} from "../service/kanbanize.service";
+import {LoggedTimeResponse} from "./loggedTimeResponse.model";
 
 export class LoggedCardModel {
   id: string;

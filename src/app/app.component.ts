@@ -14,15 +14,14 @@ export class AppComponent implements OnInit {
   isLogged = this.authService.getUserData() != undefined;
   userData: UserDataModel | undefined;
 
-  constructor(private authService: AuthService, private kanbanizeService: KanbanizeService) {
-  }
+  constructor(private authService: AuthService, private kanbanizeService: KanbanizeService) {}
 
   ngOnInit() {
     const userData = this.authService.getUserData();
     if (!userData) {
       this.isLogged = false;
     } else {
-      this.kanbanizeService.getUser(userData.board, userData.key).subscribe(
+      this.kanbanizeService.getUser().subscribe(
         (response) => {
           this.authService.saveUserData(userData.key, userData.board, response.data);
           this.userData = this.authService.getUserData();

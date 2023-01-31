@@ -19,15 +19,13 @@ export class LoginComponent {
   };
   loading = false;
 
-  constructor(private authService: AuthService, private kanbanizeService: KanbanizeService) { }
+  constructor(private authService: AuthService, private kanbanizeService: KanbanizeService) {}
 
   login() {
     this.loading = this.validate();
 
-    this.kanbanizeService.getUser(
-      this.formData.board,
-      this.formData.key
-    ).subscribe(
+    this.authService.saveUserData(this.formData.key, this.formData.board, undefined);
+    this.kanbanizeService.getUser().subscribe(
       (response) => {
         toast(
           {
@@ -39,6 +37,7 @@ export class LoginComponent {
         window.location.reload();
       },
       () => {
+        this.authService.deleteUserData();
         toast(
           {
             message: 'Your key or board is invalid to Kanbanize.',

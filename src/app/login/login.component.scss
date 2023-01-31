@@ -5,7 +5,7 @@
 .login {
   border-radius: 25px;
   padding: 1.5rem;
-  box-shadow: 0px 0px 28px -5px rgba(0,0,0,0.1);
+  box-shadow: 0 0 28px -5px rgba(0,0,0,0.1);
 }
 
 .modalLoading {
@@ -25,42 +25,12 @@ a {
   width: 40vw;
 }
 
+.icon.is-right {
+  right: 1vw !important;
+}
+
 @media only screen and (min-width: 1024px) {
   .logo {
     width: 15vw;
   }
 }
-
-@keyframes ldio-zyd4jub8gjk {
-  0% { transform: translate(-50%,-50%) rotate(0deg); }
-  100% { transform: translate(-50%,-50%) rotate(360deg); }
-}
-.ldio-zyd4jub8gjk div {
-  position: absolute;
-  width: 130px;
-  height: 130px;
-  border: 10px solid #6c5ce7;
-  border-top-color: transparent;
-  border-radius: 50%;
-}
-.ldio-zyd4jub8gjk div {
-  animation: ldio-zyd4jub8gjk 1s linear infinite;
-  top: 100px;
-  left: 100px
-}
-.loadingio-spinner-rolling-1tuxxctdi9li {
-  width: 200px;
-  height: 200px;
-  display: inline-block;
-  overflow: hidden;
-  background: #ffffff;
-}
-.ldio-zyd4jub8gjk {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform: translateZ(0) scale(1);
-  backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
-}
-.ldio-zyd4jub8gjk div { box-sizing: content-box; }

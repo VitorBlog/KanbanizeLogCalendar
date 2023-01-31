@@ -18,10 +18,11 @@ export class AuthService {
       return;
     }
 
+    userData.board = userData.board.replace('.kanbanize.com', '');
     return userData;
   }
 
-  saveUserData(key: string, board: string, response: UserModel) {
+  saveUserData(key: string, board: string, response: UserModel | undefined) {
     localStorage.setItem("userData", JSON.stringify(new UserDataModel(key, board, response)));
   }
 
