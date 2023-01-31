@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../service/auth.service";
-import {GetLoggedTimeRequest, KanbanizeService} from "../service/kanbanize.service";
+import {KanbanizeService} from "../service/kanbanize.service";
 import {toast} from "bulma-toast";
 import {LoggedCardModel} from "../model/loggedCard.model";
+import {GetLoggedTimeRequest} from "../model/getLoggedTimeRequest.model";
 
 @Component({
   selector: 'app-calendar',
@@ -21,7 +22,7 @@ export class CalendarComponent implements OnInit {
   loggedCards = new Map<string, LoggedCardModel>();
   hours = new Map<number, number>();
 
-  constructor(private authService: AuthService, private kanbanizeService: KanbanizeService) { }
+  constructor(private authService: AuthService, private kanbanizeService: KanbanizeService) {}
 
   ngOnInit(): void {
     this.getAllDaysInMonth();
@@ -30,7 +31,8 @@ export class CalendarComponent implements OnInit {
 
   load() {
     const userData = this.authService.getUserData();
-    if (!userData) {
+    if (!userData || !userData.user) {
+      this.authService.deleteUserData();
       return;
     }
 
@@ -39,7 +41,6 @@ export class CalendarComponent implements OnInit {
     this.loggedCards.clear();
 
     this.kanbanizeService.getLoggedTime(
-      userData,
       new GetLoggedTimeRequest(
         this.dates[0],
         this.dates[this.dates.length - 1],

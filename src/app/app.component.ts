@@ -21,8 +21,6 @@ export class AppComponent implements OnInit {
     if (!userData) {
       this.isLogged = false;
     } else {
-      this.authService.saveUserData(userData.key, userData.board, undefined);
-
       this.kanbanizeService.getUser().subscribe(
         (response) => {
           this.authService.saveUserData(userData.key, userData.board, response.data);
